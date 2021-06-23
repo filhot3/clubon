@@ -44,7 +44,7 @@ Algumas funcionalidades extras que não encontravam-se no escopo do treinamento 
 > Ultima atualização : 04/02/2021
 
 ## :eye: Aplicação Rodando
-:point_right: [FutibaClub](https://futibaclub.vsouza.rio.br/)
+:point_right: [FutibClub](https://futibclub.herokuapp.com/)
 
 ## :anger: Informações importantes:
 

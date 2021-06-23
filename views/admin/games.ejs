@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- header -->
+    <% include ../_partials/painel/header %>
+</head>
+
+<body>
+    <header>
+    <!-- navbar -->
+    <% include ../_partials/navbar %>
+    </header>
+
+    <section class="content">
+        <div class="container">
+            <h2>Gerenciamento de Jogos</h2>
+            <form class="row justify-content-center mt-3" method="POST">
+                <div class="md-form">
+                    <i class="fa fa-shield prefix grey-text"></i>
+                    <input type="text" id="orangeForm-team-a" name="team_a" class="form-control" required />
+                    <label for="orangeForm-team-a">Time A</label>
+                </div>
+                <i class="fa fa-arrows-h fa-fw fa-4x grey-text ml-3 mr-3" aria-hidden="true"></i>
+                <div class="md-form">
+                    <i class="fa fa-shield prefix grey-text"></i>
+                    <input type="text" id="orangeForm-team-b" name="team_b" class="form-control" required />
+                    <label for="orangeForm-team-b">Time B</label>
+                </div>
+                <div class="text-center ml-2 mr-2">
+                    <button class="btn btn-deep-orange waves-effect waves-light">Criar Jogo</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <form method="POST" action="/admin/games/results">
+            <% if (games.length !== 0) { %>
+                <h4><i class="fa fa-trophy fa-fw" aria-hidden="true"></i>Resultados dos Jogos</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-center">Jogos</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% games.forEach( game => { %>
+                        <tr>
+                            <th scope="row"><%= game.id %></th>
+                            <td class="text-center">
+                                <div class="d-inline-block col-md-8 pl-0 pr-0 ml-0 mr-0">
+                                    <span class="team-title mr-2 d-inline-block text-right"><%= game.team_a %></span>
+                                    <input name="game_<%= game.id %>[team_a]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required value="<%= (game.result_a ? game.result_a : '') %>"/>
+                                    <span class="ml-2 mr-2 d-inline-block">vs</span>
+                                    <input name="game_<%= game.id %>[team_b]" class="form-control input-sm col-sm-1 pt-0 pb-0 mt-0 mb-0 d-inline-block text-center" type="text" maxlength="2" pattern="\d*" placeholder="0" required value="<%= (game.result_b ? game.result_b : '') %>" />
+                                    <span class="team-title ml-2 d-inline-block text-left"><%= game.team_b %></span>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <a href="/admin/games/delete/<%= game.id %>" class="btn btn-sm red accent-3 waves-effect waves-light">Excluir</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <div>
+                    <button type="submit" class="btn btn-deep-orange waves-effect waves-light">Salvar Resultados</button>
+                </div>
+            </form>
+            <% } else { %>
+                <p class="alert alert-info">Nenhum Jogo Encontrado.</p>
+            <% } %>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <% include ../_partials/painel/footer %>
+</body>
+</html>

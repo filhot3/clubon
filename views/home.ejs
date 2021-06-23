@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" class="full-height">
+
+<head>
+    <!-- head -->
+    <% include _partials/page/header %>
+</head>
+
+<body>
+    <header>
+        <!--Navbar-->
+        <% include _partials/navbar %>
+
+        <!--Intro Section-->
+        <section class="view intro-2 hm-gradient">
+            <div class="full-bg-img">
+                <div class="container flex-center">
+                    <div class="row flex-center">
+                        <div class="col-md-10 col-lg-6 text-center text-md-left margins">
+                            <div class="white-text">
+                                <img src="/img/escudo.png" alt="escudo" />
+                                <h1 class="h1-responsive font-bold mt-sm-5 wow fadeInLeft" data-wow-delay="0.3s">Desafie seus amigos</h1>
+                                <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                                <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Quem consegue acertar mais jogos da Copa e do Brasileirão?
+                                </h6>
+                                <br>
+                                <% if (!locals.user) { %>
+                                    <a href="/new-account" class="btn btn-white dark-grey-text font-bold wow fadeInLeft" data-wow-delay="0.3s"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> Criar conta</a>
+                                <% } %>
+                                <a href="/ranking" class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i> Ver classificação</a>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 hidden-md-down wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
+                            <img src="/img/mock.png" class="img-fluid" alt="mock">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <section>
+        <div class="container mt-5">
+            <!-- Form contact -->
+            <form name="contactUs" method="POST">
+                <p class="h5 text-center mb-4">Escreva para nós</p>
+
+                <div class="md-form">
+                    <i class="fa fa-user prefix grey-text"></i>
+                    <input type="text" id="name" name="name" class="form-control">
+                    <label for="name">Seu nome</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fa fa-envelope prefix grey-text"></i>
+                    <input type="text" id="email" name="email" class="form-control">
+                    <label for="email">Seu email</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fa fa-tag prefix grey-text"></i>
+                    <select id="subject" name="subject" class="form-control md-select">
+                        <option value="0" disabled selected>Assunto</option>
+                        <option value="1">Reclamações</option>
+                        <option value="2">Sugestões</option>
+                        <option value="3">Informações</option>
+                        <option value="4">Outros</option>
+                    </select>
+                </div>
+
+                <div class="md-form">
+                    <i class="fa fa-pencil prefix grey-text"></i>
+                    <textarea type="text" id="message" name="message" class="md-textarea" style="height: 100px"></textarea>
+                    <label for="message">Sua mensagem</label>
+                </div>
+
+                <% if(locals.error) { %>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Atenção!</strong> <%= locals.error %>
+                    </div>
+                <% } else if (locals.previewUrl) { %>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <a href="<%= locals.previewUrl %>" target="_blank" class="alert-link"><i class="fa fa-eye fa-fw" aria-hidden="true"></i></a> Mensagem enviada com sucesso!
+                    </div>
+                <% } %>
+
+                <div class="text-center">
+                    <button class="btn btn-unique">Enviar <i class="fa fa-paper-plane-o ml-1"></i></button>
+                </div>
+            </form>
+            <!-- Form contact -->
+        </div>
+    </section>
+
+    <!-- footer -->
+    <% include _partials/page/footer %>
+
+    <script>
+        jQuery(document).ready(function($){ 
+            $("#subject").change(function () {
+                $("#subject").addClass('md-select-dropdowned')
+            })
+        })
+    </script>
+</body>
+</html>
